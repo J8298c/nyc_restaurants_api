@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { connectToDatabase } from './database/database_utils'
+import restaurantRouter from './routes/restaurants.routes'
 
 dotenv.config()
 const app = express()
@@ -21,6 +22,9 @@ if (process.env.MONGO_URI === undefined) {
     process.exit(1)
   }
 })()
+
+app.use(express.json())
+app.use('/restaurants', restaurantRouter)
 app.listen(PORT, () => {
   console.log(`app is listening on port: ${PORT}`)
 })
