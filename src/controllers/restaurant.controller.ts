@@ -31,6 +31,8 @@ export const getMultipleRestaurants = async (req: Request, res: Response): Promi
 
 export const getSingleRestaurant = async (req: Request, res: Response): Promise<void> => {
   try {
+    const { id } = req.params
+    console.log(id)
     res.send('Single Restaurants')
   } catch (err) {
     console.error(err)
