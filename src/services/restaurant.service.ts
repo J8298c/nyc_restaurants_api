@@ -9,7 +9,12 @@ interface RestaurantServiceResponse {
   success: boolean
 }
 
+const fetchRestaurantsWithQuery = async () => {
+  return [{name: 'test one', food_type: 'latin', boro: 'queens'}]
+}
+
 export const multipleRestaurantService = async (query: FetchQuery): Promise<RestaurantServiceResponse> => {
   console.log(query)
-  return { success: true, restaurants: []}
+  const restaurants = await fetchRestaurantsWithQuery()
+  return { success: true, restaurants}
 }

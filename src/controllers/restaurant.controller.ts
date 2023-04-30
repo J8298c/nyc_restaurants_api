@@ -27,7 +27,7 @@ export const getMultipleRestaurants = async (req: Request, res: Response): Promi
     
     const serviceResponse = await multipleRestaurantService(query)
     console.log(serviceResponse)
-    res.send('Multiple Restaurants')
+    res.send(serviceResponse.restaurants)
   } catch (err) {
     console.error(err)
   }
