@@ -2,9 +2,9 @@ import { type Request, type Response } from 'express'
 import { multipleRestaurantService } from '../services/restaurant.service'
 
 interface MultiRestaurantQuery {
-  zipcode: string;
-  rating?: number;
-  food_type?: string;
+  zipcode: string
+  rating?: number
+  food_type?: string
 }
 
 export const getMultipleRestaurants = async (req: Request, res: Response): Promise<void> => {
@@ -24,7 +24,7 @@ export const getMultipleRestaurants = async (req: Request, res: Response): Promi
         query.food_type = String(req.query.food_type)
       }
     }
-    
+
     const serviceResponse = await multipleRestaurantService(query)
     console.log(serviceResponse)
     res.send(serviceResponse.restaurants)
