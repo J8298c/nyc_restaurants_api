@@ -1,20 +1,24 @@
+import { type Restaurant } from '../interfaces/Restaurant'
+import { getRestaurantCollection } from '../database/database_utils'
+
 interface FetchQuery {
-  zipcode: string;
-  food_type?: string;
-  rating?: number  
+  zipcode: string
+  food_type?: string
+  rating?: number
 }
 
 interface RestaurantServiceResponse {
-  restaurants: any[];
-  success: boolean
+  restaurants: Restaurant[]
 }
 
-const fetchRestaurantsWithQuery = async () => {
-  return [{name: 'test one', food_type: 'latin', boro: 'queens'}]
+const queryDBForRestaurants = async (query: { zipcode: string }): Promise<Restaurant[]> => {
+  const collection = getRestaurantCollection('restaurants')
+  return await collection.find({ 'address.zipcode': query.zipcode }).toArray()
 }
 
 export const multipleRestaurantService = async (query: FetchQuery): Promise<RestaurantServiceResponse> => {
-  console.log(query)
-  const restaurants = await fetchRestaurantsWithQuery()
-  return { success: true, restaurants}
+  const restaurants = await queryDBForRestaurants({ zipcode: '11420' })
+  return {
+    restaurants
+  }
 }

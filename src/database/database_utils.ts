@@ -1,4 +1,5 @@
 import { MongoClient, type Collection } from 'mongodb'
+import { Restaurant } from '../interfaces/Restaurant'
 
 let mongoClient: MongoClient
 
@@ -9,6 +10,6 @@ export const connectToDatabase = async (): Promise<void> => {
   mongoClient = client
 }
 
-export function getClient (collectionName: string): Collection {
-  return mongoClient.db('sample_restaurants').collection(collectionName)
+export function getRestaurantCollection (collectionName: string): Collection<Restaurant> {
+  return mongoClient.db('sample_restaurants').collection<Restaurant>(collectionName)
 }
