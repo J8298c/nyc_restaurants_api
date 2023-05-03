@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import { multipleRestaurantService } from '../services/restaurant.service'
+import { multipleRestaurantService, singleRestaurantService } from '../services/restaurant.service'
 
 interface MultiRestaurantQuery {
   zipcode: string
@@ -37,7 +37,8 @@ export const getSingleRestaurant = async (req: Request, res: Response): Promise<
   try {
     const { id } = req.params
     console.log(id)
-    res.send('Single Restaurants')
+    const restaurant = await singleRestaurantService(id)
+    res.status(200).json({ restaurant })
   } catch (err) {
     console.error(err)
   }

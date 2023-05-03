@@ -1,5 +1,6 @@
 import { type Restaurant } from '../interfaces/Restaurant'
 import { getRestaurantCollection } from '../database/database_utils'
+import { ObjectId } from 'mongodb'
 
 interface FetchQuery {
   zipcode: string
@@ -21,4 +22,10 @@ export const multipleRestaurantService = async (query: FetchQuery): Promise<Rest
   return {
     restaurants
   }
+}
+
+export const singleRestaurantService = async (id: string): Promise<Restaurant> => {
+  const coll = getRestaurantCollection('restaurants')
+  // @ts-expect-error _id for mongo
+  return await coll.findOne({ _id: ObjectId.createFromHexString(id) })
 }
